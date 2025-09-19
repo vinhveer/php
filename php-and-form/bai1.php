@@ -36,19 +36,19 @@ function echoValue(&$var, $value_replace = null) {
             <tr>
                 <td>Length:</td>
                 <td>
-                    <input type="text" name="length" value="<?php echo echoValue($length) ?>">
+                    <input type="text" name="length" <?php echo echoValue($length) ?>>
                 </td>
             </tr>
             <tr>
                 <td>Wide:</td>
                 <td>
-                    <input type="text" name="wide" value="<?php echo echoValue($wide) ?>">
+                    <input type="text" name="wide" <?php echo echoValue($wide) ?>>
                 </td>
             </tr>
             <tr>
                 <td>Area:</td> 
                 <td>
-                    <input type="text" name="area" disabled value="<?php echo echoValue($area) ?>">
+                    <input type="text" name="area" disabled <?php echo echoValue($area) ?>>
                 </td>
             </tr>
             <tr>
