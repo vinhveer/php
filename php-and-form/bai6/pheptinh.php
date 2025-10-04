@@ -34,7 +34,9 @@
             </tr>
             <tr>
                 <td></td>
-                <td><button type="submit">Tính</button></td>
+                <td>
+                    <input type="submit" name="btnsubmit" value="Tính">
+                </td>
             </tr>
         </table>
     </form>

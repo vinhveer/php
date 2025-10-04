@@ -21,7 +21,6 @@ function echoVal(&$var, $replace = "") {
 }
 
 
-
 function calcKaraoke($start, $end) {
     if ($start < 10) throw new Exception("Giờ bắt đầu phải từ 10h");
     if ($end <= $start) throw new Exception("Giờ kết thúc phải lớn hơn giờ bắt đầu");

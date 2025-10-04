@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bài tập 1</title>
+    <style>
+        input {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <?php
@@ -26,10 +31,10 @@ function echoValue(&$var, $value_replace = null) {
 ?>
 
 <body>
-    <form action="bai1.php" method="post">
+    <form action="bai1.php" method="post" style="width: 300px; margin: 0 auto;">
         <table>
             <tr>
-                <th colspan="2">
+                <th colspan="2">    
                     <h2>Calculate Rectangle Area</h2>
                 </th>
             </tr>
