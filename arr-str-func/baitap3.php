@@ -11,10 +11,9 @@ if (isset($_POST['btnsend'])) {
     $n = $_POST['num'] ?? 0;
     if (!is_numeric($n) || $n <= 0) {
         echo "Vui lòng nhập số phần tử hợp lệ (số nguyên dương).";
-        exit;
+    } else {
+        $array = tao_mang($n);
     }
-
-    $array = tao_mang($n);
 }
 
 function tao_mang($n)

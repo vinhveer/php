@@ -35,16 +35,26 @@ if (isset($_POST['btnsend'])) {
         exit;
     }
 
+    if ($keyNum === $newNum) {
+        echo "Giá trị cần thay thế và giá trị thay thế không được giống nhau.";
+        exit;
+    }
+
+    if (!in_array($keyNum, $numArray)) {
+        echo "Giá trị cần thay thế không tồn tại trong mảng.";
+        exit;
+    }
+
     $replaceArray = str_replace($keyNum, $newNum, $numArray);
 }
 
-function echoArray($array) {
+function echoArray(&$array) {
     if (!empty($array)) {
         echo 'value="' . implode(", ", $array) . '"';
     }
 }
 
-function echoValue($value) {
+function echoValue(&$value) {
     if (isset($value) && $value !== '') {
         echo 'value="' . $value . '"';
     }

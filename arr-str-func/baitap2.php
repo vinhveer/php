@@ -34,6 +34,13 @@ function echoValue(&$value) {
                     <h2>Nhập và tính trên dãy số</h2>
                 </td>
             </tr>
+            <?php if (isset($error)): ?>
+            <tr>
+                <td colspan="2" style="color: red;">
+                    <?php echo $error; ?>
+                </td>
+            </tr>
+            <?php endif; ?>
             <tr>
                 <td>Nhập dãy số:</td>
                 <td>

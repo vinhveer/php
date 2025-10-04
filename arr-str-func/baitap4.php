@@ -17,7 +17,6 @@ if (isset($_POST['btnsend'])) {
 
     if (!is_numeric($keyNum)) {
         echo "Vui lòng nhập số hợp lệ cho keyNum.";
-        exit;
     }
 
     $numArray = array_map('trim', explode(',', $arrNum));
@@ -25,7 +24,6 @@ if (isset($_POST['btnsend'])) {
     foreach ($numArray as $num) {
         if ($num === '' || !is_numeric($num)) {
             echo "Vui lòng nhập dãy số hợp lệ, các số cách nhau bởi dấu phẩy.";
-            exit;
         }
     }
 

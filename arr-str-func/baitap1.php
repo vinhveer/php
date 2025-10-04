@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="widtd=device-widtd, initial-scale=1.0">
-    <title>Array and Number Operations</title>
+    <title>Nhập và tính trên dãy số</title>
 </head>
 
 <?php
@@ -65,8 +65,6 @@ if (isset($_POST["btnsend"])) {
     $n = $_POST['number'];
 
     if (is_numeric($n) && $n > 0) {
-        $n = (int)$n;
-
         $array = generateRandomArray($n);
         $evenCount = countEvenNumbers($array);
         $lesstdan100Count = countLesstdan100($array);
@@ -78,15 +76,28 @@ if (isset($_POST["btnsend"])) {
         $error = "Vui lòng nhập một số nguyên dương.";
     }
 }
+
+function echoValue(&$value) {
+    if (isset($value) && $value !== '') {
+        echo 'value="' . htmlspecialchars($value) . '"';
+    }
+}
 ?>
 
 <body>
     <form method="post">
         <table>
             <tr><h2>Nhập và tính trên dãy số</h2></tr>
+            <?php if (isset($error)): ?>
+            <tr>
+                <td colspan="2" style="color: red;">
+                    <?php echo $error; ?>
+                </td>
+            </tr>
+            <?php endif; ?>
             <tr>
                 <td>Nhập n</td>
-                <td><input type="text" id="number" name="number" value=""></td>
+                <td><input type="text" id="number" name="number" <?php echoValue($n) ?>></td>
             </tr>
             <tr>
                 <td></td>

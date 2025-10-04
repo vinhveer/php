@@ -27,13 +27,13 @@ if (isset($_POST['btnsend'])) {
     rsort($descArray);
 }
 
-function echoValue($value) {
+function echoValue(&$value) {
     if (isset($value) && $value !== '') {
         echo 'value="' . $value . '"';
     }
 }
 
-function echoArray($array) {
+function echoArray(&$array) {
     if (!empty($array)) {
         echo 'value="' . implode(", ", $array) . '"';
     }
