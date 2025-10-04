@@ -8,12 +8,14 @@
 
 <?php
 if (isset($_POST['btnsub'])) {
-    if (is_numeric($_POST['arrNum'])) {
+    $arrNum = $_POST['arrNum'] ?? '';
+    $numArray = explode(',', $arrNum);
+
+    if (empty($numArray)) {
         echo "Vui lòng nhập dãy số hợp lệ, các số cách nhau bởi dấu phẩy.";
         exit;
     }
-    $arrNum = $_POST['arrNum'] ?? '';
-    $numArray = explode(',', $arrNum);
+
     $result = array_sum($numArray);
 }
 

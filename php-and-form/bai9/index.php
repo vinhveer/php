@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
+    <style>
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: blue;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        main {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <nav>

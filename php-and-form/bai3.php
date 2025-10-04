@@ -26,11 +26,17 @@ function echoValue(&$var, $value_replace = null) {
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (validateNumber($_POST["chiSoCu"], $_POST["chiSoMoi"], $_POST["donGia"])) {
-        $tenChuHo = $_POST["tenChuHo"];
-        $chiSoCu = $_POST["chiSoCu"];
-        $chiSoMoi = $_POST["chiSoMoi"];
-        $donGia = $_POST["donGia"];
-        $soTienThanhToan = $_POST["soTienThanhToan"];
+        if (empty($_POST["tenChuHo"])) {
+            echo "Vui lòng nhập tên chủ hộ";
+        } elseif ($_POST["chiSoMoi"] < $_POST["chiSoCu"]) {
+            echo "Chỉ số mới phải lớn hơn chỉ số cũ";
+        } else {
+            $tenChuHo = $_POST["tenChuHo"];
+            $chiSoCu = $_POST["chiSoCu"];
+            $chiSoMoi = $_POST["chiSoMoi"];
+            $donGia = $_POST["donGia"];
+            $soTienThanhToan = ($chiSoMoi - $chiSoCu) * $donGia;
+        }
     }
 }
 ?>

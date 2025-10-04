@@ -7,39 +7,40 @@
 </head>
 
 <?php
-function validate(...$numbers) {
-    foreach ($numbers as $number) {
-        if (!is_numeric($number)) return false;
-    }
-
-    return true;
+function validateTime($t) {
+    return preg_match('/^\d{2}:\d{2}$/', $t);
 }
 
 function echoVal(&$var, $replace = "") {
     $temp = isset($var) ? $var : $replace;
-    echo "value=\"" . htmlspecialchars($temp, ENT_QUOTES, "UTF-8") . "\"";
+    echo "value=\"$temp\"";
 }
 
-
 function calcKaraoke($start, $end) {
-    if ($start < 10) throw new Exception("Giờ bắt đầu phải từ 10h");
-    if ($end <= $start) throw new Exception("Giờ kết thúc phải lớn hơn giờ bắt đầu");
-
     if ($end <= 17)
         return ($end - $start) * 20000;
     else
         return ($end - $start) * 45000;
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (validate($_POST["gioBatDau"], $_POST["gioKetThuc"])) {
-        $gioBatDau = $_POST["gioBatDau"];
-        $gioKetThuc = $_POST["gioKetThuc"];
-        try {
-            $tinhTien = calcKaraoke($gioBatDau, $gioKetThuc);
-        } catch (Exception $e) {
-            echo $e->getMessage();
+    $gioBatDau = $_POST["gioBatDau"] ?? '';
+    $gioKetThuc = $_POST["gioKetThuc"] ?? '';
+
+    if (!validateTime($gioBatDau) || !validateTime($gioKetThuc)) {
+        echo "Vui lòng nhập đúng định dạng giờ (HH:MM)";
+    } else {
+        [$sbH, $sbM] = explode(':', $gioBatDau);
+        [$skH, $skM] = explode(':', $gioKetThuc);
+        $start = $sbH + $sbM / 60;
+        $end   = $skH + $skM / 60;
+
+        if ($start < 10) {
+            echo "Giờ bắt đầu phải từ 10h";
+        } elseif ($end <= $start) {
+            echo "Giờ kết thúc phải lớn hơn giờ bắt đầu";
+        } else {
+            $tinhTien = calcKaraoke($start, $end);
         }
     }
 }
@@ -55,11 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </tr>
             <tr>
                 <td>Giờ bắt đầu: </td>
-                <td><input type="text" name="gioBatDau" <?php echoVal($gioBatDau) ?>> (h)</td>
+                <td><input type="time" name="gioBatDau" <?php echoVal($gioBatDau) ?>></td>
             </tr>
             <tr>
                 <td>Giờ kết thúc: </td>
-                <td><input type="text" name="gioKetThuc" <?php echoVal($gioKetThuc) ?> > (h)</td>
+                <td><input type="time" name="gioKetThuc" <?php echoVal($gioKetThuc) ?>></td>
             </tr>
             <tr>
                 <td>Tiền thanh toán: </td>

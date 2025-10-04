@@ -30,23 +30,6 @@ function xuat_mang($array)
 {
     return implode(", ", $array);
 }
-
-function tinh_tong($array)
-{
-    return array_sum($array);
-}
-
-function tim_max($array)
-{
-    return max($array);
-}
-
-function tim_min($array)
-{
-    return min($array);
-}
-
-
 ?>
 <body>
     <form action="baitap3.php" method="post">
@@ -80,7 +63,7 @@ function tim_min($array)
                     GTLN (MAX) trong mảng:
                 </td>
                 <td>
-                    <input type="text" value="<?php echo tim_max($array) ?>" disabled />
+                    <input type="text" value="<?php echo max($array) ?>" disabled />
                 </td>
             </tr>
             <tr>
@@ -88,13 +71,13 @@ function tim_min($array)
                     GTNN (MIN) trong mảng:
                 </td>
                 <td>
-                    <input type="text" value="<?php echo tim_min($array) ?>" disabled />
+                    <input type="text" value="<?php echo min($array) ?>" disabled />
                 </td>
             </tr>
             <tr>
                 <td>Tổng mảng</td>
                 <td>
-                    <input type="text" value="<?php echo tinh_tong($array) ?>" disabled />
+                    <input type="text" value="<?php echo array_sum($array) ?>" disabled />
                 </td>
             </tr>
             <tr>

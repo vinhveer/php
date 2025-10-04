@@ -86,7 +86,7 @@ if (isset($_POST["btnsend"])) {
             <tr><h2>Nhập và tính trên dãy số</h2></tr>
             <tr>
                 <td>Nhập n</td>
-                <td><input type="text" id="number" name="number" required></td>
+                <td><input type="text" id="number" name="number" value=""></td>
             </tr>
             <tr>
                 <td></td>
