@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enter Your Information</title>
+    <style>
+        td {
+            min-width: 120px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend><b>Enter Your Information</b></legend>
+        <form action="config.php" method="post">
+            <table>
+                <tr>
+                    <td class="label">Fullname</td>
+                    <td><input type="text" name="fullname" /></td>
+                </tr>
+
+                <tr>
+                    <td class="label">Address</td>
+                    <td><input type="text" name="address" /></td>
+                </tr>
+
+                <tr>
+                    <td class="label">Phone</td>
+                    <td><input type="text" name="phone" /></td>
+                </tr>
+
+                <tr>
+                    <td class="label">Gender</td>
+                    <td>
+                        <label class="inline"><input type="radio" name="gender" checked /> Nam</label>
+                        <label class="inline"><input type="radio" name="gender" /> Nữ</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label">Country</td>
+                    <td>
+                        <select name="country">
+                            <option>Việt Nam</option>
+                            <option>United States</option>
+                            <option>Japan</option>
+                            <option>Singapore</option>
+                            <option>Thailand</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label">Study</td>
+                    <td>
+                        <label class="inline"><input type="checkbox" name="study[]" value="PHP & MySQL" /> PHP
+                            &amp; MySQL</label>
+                        <label class="inline"><input type="checkbox" name="study[]" value="ASP.NET" />
+                            ASP.NET</label>
+                        <label class="inline"><input type="checkbox" name="study[]" value="CCNA" /> CCNA</label>
+                        <label class="inline"><input type="checkbox" name="study[]" value="Security+" />
+                            Security+</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="label" style="vertical-align: top;">Note</td>
+                    <td>
+                        <textarea name="note"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td class="actions">
+                        <input type="submit" value="Gửi" name="send" />
+                        <input type="reset" value="Hủy" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </fieldset>
+</body>
+
+</html>
