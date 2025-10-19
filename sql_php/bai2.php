@@ -14,6 +14,7 @@
 
         th {
             color: #bc1c00;
+            text-align: center;
         }
 
         table tr:nth-child(even) {
@@ -35,13 +36,7 @@ $data = selectAll($conn, 'khach_hang');
     $headers = [
         'Ma_khach_hang' => 'Mã khách hàng',
         'Ten_khach_hang' => 'Tên khách hàng',
-        'Phai' => [
-            'Phái',
-            [
-                0 => '<img src="Hinh_sua/nam.png" alt="Nam" width="40">',
-                1 => '<img src="Hinh_sua/nu.png" alt="Nữ" width="40">'
-            ]
-        ],
+        'Phai' => ['Phái'],
         'Dia_chi' => 'Địa chỉ',
         'Dien_thoai' => 'Điện thoại',
         'Email' => 'Email'

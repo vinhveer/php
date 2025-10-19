@@ -11,6 +11,10 @@
             padding: 8px;
             text-align: left;
         }
+
+        th {
+            text-align: center;
+        }
     </style>
 </head>
 

@@ -39,8 +39,6 @@ function generateTable($data, $headers = [], $isSTT = false)
 
     // Bắt đầu tạo bảng
     $html = '<table>';
-
-    // Tiêu đề
     $html .= '<tr>';
 
     if ($isSTT) {
@@ -74,18 +72,121 @@ function generateTable($data, $headers = [], $isSTT = false)
     echo $html;
 }
 
-function generateList($data)
+function generateList($data, $title = "")
 {
     $html = "<table>";
+    if (!empty($title)) {
+        $html .= "<tr><th colspan='2' class='title'><h2>" . htmlspecialchars($title) . "</h2></th></tr>";
+    }
+
     foreach ($data as $item) {
         $html .= "<tr>";
-        $html .= "<td><img src='" . htmlspecialchars($item['Hinh']) . "' /></td>";
+        $html .= "<td class='image'><img src='Hinh_sua/" . htmlspecialchars($item['Hinh']) . "' /></td>";
         $html .= "<td>
         <p><strong>" . htmlspecialchars($item['Ten_sua']) . "</strong></p>
+
+        <p>Nhà sản xuất: " . htmlspecialchars($item['Ten_hang_sua']) . "</p>
+        <p>Trọng lượng: " . htmlspecialchars($item['Trong_luong']) . " gr - Đơn giá: " . number_format($item['Don_gia'], 0, ',', '.') . " VNĐ</p>
         </td>
         </tr>";
     }
+    $html .= "</table>";
+    echo $html;
 }
+
+function generateGrid($data, $itemsPerRow = 3, $enableLinks = "", $title = "")
+{
+    $html = "<table>";
+    $count = 0;
+
+    if (!empty($title)) {
+        $html .= "<tr><th colspan='{$itemsPerRow}' class='title'><h2>" . htmlspecialchars($title) . "</h2></th></tr>";
+    }
+
+    foreach ($data as $item) {
+        if ($count % $itemsPerRow == 0) {
+            if ($count > 0) {
+                $html .= "</tr>";
+            }
+            $html .= "<tr>";
+        }
+
+        $title = htmlspecialchars($item['Ten_sua']);
+        if (!empty($enableLinks)) {
+            $link = $enableLinks . urlencode($item['Ma_sua']);
+            $title = "<a href='{$link}'><strong>{$title}</strong></a>";
+        } else {
+            $title = "<strong>{$title}</strong>";
+        }
+
+        $title .= "<p>" . htmlspecialchars($item['Trong_luong']) . " gr - " . 
+            number_format($item['Don_gia'], 0, ',', '.') . " VNĐ</p>";
+
+        $html .= "<td>
+            {$title}<br/>
+            <img src='Hinh_sua/" . htmlspecialchars($item['Hinh']) . "' 
+                 alt='" . htmlspecialchars($item['Ten_sua']) . "' />
+        </td>";
+
+        $count++;
+    }
+
+    if ($count > 0) {
+        $html .= "</tr>";
+    }
+    $html .= "</table>";
+
+    echo $html;
+}
+
+function generateDetails($data, $return = "")
+{
+
+    $html = "
+    <tr>
+        <td colspan='2' class='details-title'>
+            <h2>" . htmlspecialchars($data['Ten_sua']) . " - " . htmlspecialchars($data['Ten_hang_sua']) . "</h2>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <img src='Hinh_sua/" . htmlspecialchars($data['Hinh']) . "'
+                 alt='" . htmlspecialchars($data['Ten_sua']) . "' />
+        </td>
+        <td>
+            <p><strong><i>Thành phần dinh dưỡng:</i></strong><br>"
+                . nl2br(htmlspecialchars($data['TP_dinh_duong'])) . "</p>
+
+            <p><strong><i>Lợi ích:</i></strong><br>"
+                . nl2br(htmlspecialchars($data['Loi_ich'])) . "</p>
+
+            <p><strong>Trọng lượng:</strong> "
+                . htmlspecialchars($data['Trong_luong']) . " gr - <strong>Đơn giá:</strong> "
+                . number_format((int)$data['Don_gia'], 0, ',', '.') . " VNĐ</p>
+        </td>
+    </tr>";
+
+    if (!empty($return)) {
+        $html .= "
+        <tr>
+            <td colspan='2'>
+                <a href='" . htmlspecialchars($return) . "'>Quay về</a>
+            </td>
+        </tr>";
+    }
+
+    echo $html;
+}
+
+function generateMoreDetails($data) {
+    echo "<table>";
+    foreach ($data as $item) {
+        generateDetails($item);
+    }
+    echo "</table>";
+}
+
 
 function generatePagination($totalItems, $pagination, $baseUrl)
 {

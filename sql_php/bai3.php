@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bài 3</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        th,
-        td {
+        th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+            border-collapse: collapse;
         }
 
         th {
             color: #bc1c00;
+            text-align: center;
         }
 
         table tr:nth-child(even) {
@@ -26,45 +26,31 @@
 
 <?php
 include('lib/import.php');
+
+$data = selectAll($conn, 'khach_hang');
 ?>
 
 <body>
     <?php
-    generateTitle("THÔNG TIN HÓA ĐƠN VÀ CHI TIẾT HÓA ĐƠN");
+    generateTitle("THÔNG TIN KHÁCH HÀNG");
 
     $headers = [
-        'sua.Ten_sua'           => 'Tên sữa',
-        'hang_sua.Ten_hang_sua' => 'Hãng sữa',
-        'sua.Trong_luong'       => 'Trọng lượng',
-        'ct_hoadon.Don_gia'     => 'Đơn giá'
+        'Ma_khach_hang' => 'Mã khách hàng',
+        'Ten_khach_hang' => 'Tên khách hàng',
+        'Phai' => [
+            'Phái',
+            [
+                0 => '<img src="Hinh_sua/nam.png" alt="Nam" width="40">',
+                1 => '<img src="Hinh_sua/nu.png" alt="Nữ" width="40">'
+            ]
+        ],
+        'Dia_chi' => 'Địa chỉ',
+        'Dien_thoai' => 'Điện thoại',
+        'Email' => 'Email'
     ];
 
-    $page    = isset($_GET['page']) ? $_GET['page'] : 1;
-    $count   = 5;
-    $startAt = ($page - 1) * $count;
-
-    $paginationIn = ['count' => $count, 'start_at' => $startAt];
-
-    $result = selectJoin(
-        $conn,
-        'ct_hoadon',
-        [
-            'sua'       => 'ct_hoadon.Ma_sua = sua.Ma_sua',
-            'hang_sua'  => 'sua.Ma_hang_sua = hang_sua.Ma_hang_sua'
-        ],
-        null,
-        $headers,
-        $paginationIn
-    );
-
-    $data = isset($result['data']) ? $result['data'] : $result;
-    generateTable($data, $headers, true);
-
-    if (isset($result['pagination'])) {
-        $totalItems = $result['pagination']['count'];
-        generatePagination($totalItems, $paginationIn, '/php/sql_php/bai3.php');
-    }
+    $data = selectAll($conn, 'khach_hang');
+    generateTable($data, $headers);
     ?>
 </body>
-
 </html>
